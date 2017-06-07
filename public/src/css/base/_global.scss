@@ -1,0 +1,24 @@
+body {
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00B7FF;
+}
+li{
+  list-style: none;
+}
+.users{
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+  flex-direction: column;
+}
+.user{
+  border: 1px dashed #ccc;
+  margin: 20px 0;
+  padding: 10px;
+  width: 100%;
+}
+.mdl-grid__container{
+  max-width: 900px;
+}
