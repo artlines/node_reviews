@@ -7,11 +7,9 @@ let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let app = express();
-let index = require('./routes/index');
-let users = require('./routes/users');
-let events = require('./routes/events');
+let reviews = require('./routes/reviews');
 let db = require('./db');
-var helmet = require('helmet');
+let helmet = require('helmet');
 let session_options = {
   checkExpirationInterval: 900000,
   expiration: 86400000,
@@ -40,7 +38,7 @@ app.use(session({
 }));
 */
 
-app.use('/reviews', events);
+app.use('/reviews', reviews);
 
 // Connect to MySQL on start
 db.connect(db.config.MODE_TEST, function(err) {

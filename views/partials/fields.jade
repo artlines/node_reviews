@@ -1,11 +1,14 @@
 div
-  label name:
-    input(name='name')
+  label Имя:
+    input(name='name' class='mdl-textfield__input' type='text' required)
+    p.error-message
 div
   label email:
-    input(name='email' type='email')
+    input(name='email' type='email' class='mdl-textfield__input' required)
+    p.error-message
 div
-  label phone:
-    input(name='phone' type='number' min='0')
+  label Отзыв:
+    textarea(name='text' class='mdl-textfield__input' type='text' required)
+    p.error-message
 div
-  input(type='button', value='Save', name="userCreateSubmit")
+  input(type='button', value='Отправить', name="reviewCreateSubmit")

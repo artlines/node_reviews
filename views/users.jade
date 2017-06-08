@@ -5,14 +5,13 @@ block content
     div.mdl-cell.mdl-cell--12-col
       h1= title
       p Welcome to #{title}
-    div.users.mdl-cell.mdl-cell--12-col
-      - each user in users
-        a(href='/users/get/'+user.id)
-          div.user
-            - each val, key in user
+    div.reviews.mdl-cell.mdl-cell--12-col
+      - each review in reviews
+        a(href='/reviews/get/'+review.id)
+          div.review
+            - each val, key in review
               li #{key}: #{val}
-        a(href='/users/delete/' + user.id)
+        a(href='/reviews/delete/' + review.id)
           i.material-icons close
-  h2 Edit user
-  form(method='post', action='users/create', name='userCreate')
-    include partials/fields
+  h2 Edit review
+

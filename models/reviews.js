@@ -1,35 +1,41 @@
-var db = require('../db');
+let db = require('../db');
 
 module.exports.create = (data, done) => {
-  db.get().query('INSERT INTO users SET ?', [data], (err, result) => {
+  db.get().query('INSERT INTO reviews SET ?', [data], (err, result) => {
     if (err) return done(err);
     done(null, result.insertId)
   });
 };
 
 module.exports.getAll = (done) => {
-  db.get().query('SELECT * FROM users WHERE is_active=?', db.config.USER_ACTIVE, (err, rows) => {
+  let sql = `
+    SELECT r.preview, r.text, r.rating, r.user_id, uv.value as name
+    FROM reviews r 
+    LEFT JOIN users_values uv ON (r.user_id = uv.user_id)
+    WHERE r.is_active=? AND uv.option_id = ?`;
+
+  db.get().query(sql, [db.config.ACTIVE, 12], (err, rows) => {
     if (err) return done(err);
     done(null, rows);
   });
 };
 
 module.exports.getById = (userId, done) => {
-  db.get().query('SELECT * FROM users WHERE id=?', userId, (err, rows) => {
+  db.get().query('SELECT * FROM reviews WHERE id=?', userId, (err, rows) => {
     if (err) return done(err);
     done(null, rows[0]);
   });
 };
 
 module.exports.edit = (data, userId, done) => {
-  db.get().query('UPDATE USERS SET ? WHERE id = ?', [data, userId], (err, rows) => {
+  db.get().query('UPDATE reviews SET ? WHERE id = ?', [data, userId], (err, rows) => {
     if (err) return done(err);
     done(null, rows);
   });
 };
 
 module.exports.delete = (userId, done) => {
-  db.get().query('DELETE FROM USERS WHERE id = ?', [userId], (err, rows) => {
+  db.get().query('DELETE FROM reviews WHERE id = ?', [userId], (err, rows) => {
     if (err) return done(err);
     done(null, rows);
   });
