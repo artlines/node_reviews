@@ -10,10 +10,6 @@ let app = express();
 let reviews = require('./routes/reviews');
 let db = require('./db');
 let helmet = require('helmet');
-let session_options = {
-  checkExpirationInterval: 900000,
-  expiration: 86400000,
-}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,17 +23,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-/*
-app.use(session({
-  key: 'artline_session',
-  secret: '7cl6mpv35vjsuy9sqb63nwdr0izkemlh5ho6hfrl',
-  resave: true,
-  saveUninitialized: true,
-  store: new SessionStore(Object.assign(db.options, session_options))
-}));
-*/
-
 app.use('/reviews', reviews);
 
 // Connect to MySQL on start

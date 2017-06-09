@@ -1,17 +1,13 @@
 function Validator() {}
 
 Validator.prototype = {
-  errors: [],
+  error: '',
   checkValidity: function(input) {
     var validity = input.validity;
     console.log(validity);
 
     if (validity.valueMissing) {
       this.addInvalidity('Поле не должно быть пусто!');
-    }
-
-    if (validity.patternMismatch) {
-      this.addInvalidity('Неверный формат данных');
     }
 
     if (validity.rangeUnderflow) {
@@ -26,15 +22,12 @@ Validator.prototype = {
 
   // Добавляем сообщение об ошибке в массив ошибок
   addInvalidity: function(message) {
-    this.errors.forEach((item, i, arr) => {if(message == item) arr.splice(i, 1)});
-    this.errors.push(message);
+    this.error = message;
   },
 
   // Получаем общий текст сообщений об ошибках
   getInvalidities: function() {
-    console.log(this.errors);
-
-    return this.errors.join('<br>');
+    return this.error;
   },
 };
 

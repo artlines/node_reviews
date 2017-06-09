@@ -3,9 +3,6 @@ let router = express.Router();
 let reviews = require('../models/reviews');
 let util = require('util');
 
-/* GET reviews listing. */
-
-/* GET reviews listing. */
 router.get('/', (req, res, next) => {
   reviews.getAll((err, result) => {
     if(err) console.log(err);
@@ -14,11 +11,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/create', (req, res, next) => {
-  if (!req.body) res.send('create user failed!');
   //проверка полей и очитска
+
   reviews.create(req.body, (err, result) => {
     if(err) console.log(err);
-    res.send('user created with id: ' + result);
+    res.send(result);
   });
 });
 

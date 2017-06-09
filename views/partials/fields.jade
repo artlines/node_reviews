@@ -1,14 +1,11 @@
-div
-  label Имя:
-    input(name='name' class='mdl-textfield__input' type='text' required)
+div.mdl-textfield
+    input(name='name' class='mdl-textfield__input' type='text' placeholder="Имя" required)
+    p.error-message
+div.mdl-textfield
+    input(name='email' type='email' class='mdl-textfield__input' placeholder="email" required)
+    p.error-message
+div.mdl-textfield
+    textarea(name='text' class='mdl-textfield__input' type='text' placeholder="Отзыв" required)
     p.error-message
 div
-  label email:
-    input(name='email' type='email' class='mdl-textfield__input' required)
-    p.error-message
-div
-  label Отзыв:
-    textarea(name='text' class='mdl-textfield__input' type='text' required)
-    p.error-message
-div
-  input(type='button', value='Отправить', name="reviewCreateSubmit")
+  input(type='submit', value='Отправить', name="reviewCreateSubmit" class="mdl-button mdl-js-button mdl-js-ripple-effect")

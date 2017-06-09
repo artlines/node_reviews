@@ -13,3 +13,15 @@
 //@import '../../node_modules/mdi/css/materialdesignicons.min.css';
 @import '../../node_modules/material-design-lite/material.min.css';
 
+form{
+  width: 500px;
+}
+input{
+  border: none;
+}
+input:active, input:focus,textarea:active, textarea:focus {
+  outline: none;
+}
+input::-moz-focus-inner {
+  border: 0;
+}
