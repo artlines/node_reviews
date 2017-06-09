@@ -3,7 +3,7 @@ let db = require('../db');
 module.exports.create = (data, done) => {
   db.get().query('INSERT INTO reviews SET ?', [data], (err, result) => {
     if (err) return done(err);
-    done(null, result.insertId)
+    done(null, result.insertId.toString());
   });
 };
 

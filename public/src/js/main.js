@@ -19,7 +19,8 @@ reviewCreateSubmit.addEventListener('click', e => {
   if (data.stopSubmit) {
     e.preventDefault();
   } else {
-    xhrPost('reviewCreate', data.checked, url);
+    e.preventDefault();
+    xhrPost(reviewCreateForm.name, data.checked, url);
   };
 });
 

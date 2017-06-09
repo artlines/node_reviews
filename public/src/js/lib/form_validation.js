@@ -20,7 +20,7 @@ function formValidation(form) {
       input.parentNode.classList.add('is-invalid');
       data.stopSubmit = true;
     }else{
-      if (input.type === 'submit') continue;
+      if (input.type === 'button') continue;
       data.checked[input.name] = input.value;
     }
   }
