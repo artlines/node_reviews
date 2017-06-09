@@ -3,6 +3,8 @@ let router = express.Router();
 let reviews = require('../models/reviews');
 let util = require('util');
 let validator = require('validator');
+let https = require('https');
+let bl = require('bl');
 let processData = require('../middlewares/reviews');
 
 router.get('/', (req, res, next) => {
@@ -11,6 +13,24 @@ router.get('/', (req, res, next) => {
     processData.unescape(result);
     res.render('reviews', {title: 'hola', reviews: result});
   });
+});
+
+router.get('/session', (req, res, next) => {
+  https.get('https://belleyou.ru/user/unserializeSessionData/?session_id='+req.cookies.ci_session, (response) => {
+    let rawData = '';
+    response.setEncoding('utf8');
+    response.on('data', (row) => rawData += row);
+    response.on('error', (e) => console.log(e.message));
+    response.on('end', () =>{
+      res.send(rawData);
+    });
+  });
+/*  reviews.getSessionData(req.cookies.ci_session, (err, result) => {
+    if(err) console.log(err);
+
+    let d = JSON.stringify(result);
+    res.send(d);
+  });*/
 });
 
 router.post('/create', (req, res, next) => {

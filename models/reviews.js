@@ -20,10 +20,12 @@ module.exports.getAll = (done) => {
   });
 };
 
-module.exports.getById = (userId, done) => {
-  db.get().query('SELECT * FROM reviews WHERE id=?', userId, (err, rows) => {
+
+
+module.exports.getSessionData = (id, done) => {
+  db.get().query('SELECT * FROM ci_sessions WHERE id=?', id, (err, rows) => {
     if (err) return done(err);
-    done(null, rows[0]);
+    done(null, rows);
   });
 };
 
