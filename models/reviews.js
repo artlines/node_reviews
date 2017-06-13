@@ -7,15 +7,22 @@ module.exports.create = (data, done) => {
   });
 };
 
-module.exports.getAll = (done) => {
+module.exports.getAll = (active, done) => {
+  let active_reviews = '';
+  let condition_values = [12];
+  if (active){
+    active_reviews = ` AND r.is_active=?`;
+    condition_values.push(db.config.ACTIVE);
+  }
   let sql = `
-    SELECT r.preview, r.text, r.rating, r.user_id, uv.value as name
+    SELECT r.preview, r.text, r.rating, r.user_id, r.is_active, uv.value as name
     FROM reviews r 
     LEFT JOIN users_values uv ON (r.user_id = uv.user_id)
-    WHERE r.is_active=? AND uv.option_id = ?`;
+    WHERE uv.option_id = ?`+active_reviews;
 
-  db.get().query(sql, [db.config.ACTIVE, 12], (err, rows) => {
+  db.get().query(sql, condition_values, (err, rows) => {
     if (err) return done(err);
+    console.log(rows);
     done(null, rows);
   });
 };
