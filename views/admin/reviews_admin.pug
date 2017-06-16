@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+
+  div.mdl-grid.mdl-grid__container
+      div.mdl-cell.mdl-cell--12-col
+          h1= title
+          ul.mdl-list
+            each review in reviews
+              li.mdl-list__item
+                span.mdl-list__item-primary-content= review.name
+                span.mdl-list__item-secondary-action
+                  label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for=review.id)
+                    input(type="checkbox" id=review.id class="mdl-switch__input" checked=review.is_active)
+

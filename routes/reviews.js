@@ -24,7 +24,7 @@ router.get('/admin', (req, res, next) => {
       reviews.getAll(false, (err, result) => {
         if(err) console.log(err);
         processData.unescape(result);
-        res.render('reviews', {title: 'hola', reviews: result});
+        res.render('admin/reviews_admin', {title: 'hola', reviews: result});
       });
     }else{
      res.redirect('/login');

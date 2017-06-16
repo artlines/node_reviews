@@ -15,7 +15,7 @@ module.exports.getAll = (active, done) => {
     condition_values.push(db.config.ACTIVE);
   }
   let sql = `
-    SELECT r.preview, r.text, r.rating, r.user_id, r.is_active, uv.value as name
+    SELECT r.id, r.preview, r.text, r.rating, r.user_id, r.is_active, uv.value as name
     FROM reviews r 
     LEFT JOIN users_values uv ON (r.user_id = uv.user_id)
     WHERE uv.option_id = ?`+active_reviews;

@@ -1,0 +1,9 @@
+div.mdl-textfield
+    input(name='rating' type='number' min='0' max='5' class='mdl-textfield__input' placeholder="рейтинг" required)
+    p.error-message
+div.mdl-textfield
+    textarea(name='text' class='mdl-textfield__input' type='text' placeholder="Отзыв" required)
+    p.error-message
+div
+    input(name='user_id' type='hidden' value=user_id)
+    input(type='button', value='Отправить', name="reviewCreateSubmit" class="mdl-button mdl-js-button mdl-js-ripple-effect")
