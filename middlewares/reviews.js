@@ -6,13 +6,13 @@ let process = {
       checked: {}
     };
 
-    if(this.validator.isNumeric(data.rating)){
+    if(data.rating && this.validator.isNumeric(data.rating)){
       processedData.checked.rating = data.rating;
     }else{
       processedData.errors.push('Некорректно введен рейтинг');
     }
 
-    if(this.validator.isNumeric(data.user_id)){
+    if(data.user_id){
       processedData.checked.user_id = data.user_id;
     }else{
       processedData.errors.push('Необходимо авторизоваться/зарегистрироваться');
@@ -20,11 +20,17 @@ let process = {
 
     if(data.text){
       processedData.checked.text = this.validator.escape(data.text);
-      processedData.checked.preview = processedData.checked.text.substring(0,100);
     }else{
       processedData.errors.push('Некорректно введен отзыв');
     }
-    return processedData;
+
+    if(data.preview){
+      processedData.checked.preview =  this.validator.escape(data.preview);
+    }else{
+      processedData.checked.preview = processedData.checked.text.substring(0,200);
+    }
+
+      return processedData;
   },
 
   unescape(data){

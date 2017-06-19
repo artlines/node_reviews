@@ -24,7 +24,7 @@ router.get('/admin', (req, res, next) => {
       reviews.getAll(false, (err, result) => {
         if(err) console.log(err);
         processData.unescape(result);
-        res.render('admin/reviews_admin', {title: 'hola', reviews: result});
+        res.render('admin/reviews_admin', {title: 'Редактирование отзывов', reviews: result});
       });
     }else{
      res.redirect('/login');
@@ -55,10 +55,46 @@ router.get('/delete/:id', (req, res, next) => {
 });
 
 router.post('/edit/:id', (req, res, next) => {
-  reviews.edit(req.body, req.params.id, (err, result) => {
-    if(err) console.log(err);
-    res.send('user edited!'+util.inspect(result));
-  });
+  let id = req.params.id;
+  if (id > 0){
+    reviews.edit(req.body, req.params.id, (err, result) => {
+      if(err) console.log(err);
+      res.send('Успех!');
+    });
+  }else{
+    req.body.user_id = 1;
+    let processedData = processData.validate(req.body);
+    if (processedData.errors.length){
+      res.send(processedData.errors.join('<br>'));
+    }else{
+      processedData.checked.is_active = 1;
+      reviews.create(processedData.checked, (err, result) => {
+        if(err) console.log(err);
+        if (validator.isNumeric(result) && result > 0)
+          res.send('Отзыв успешно добавлен');
+      });
+    }
+  }
+});
+
+router.post('/getOne/:id', (req, res, next) => {
+  let id = req.params.id;
+  if (id > 0){
+    reviews.getOne(req.params.id, (err, result) => {
+      if(err) console.log(err);
+      res.render('review_one', {title: 'Отзыв', review: result[0]});
+    });
+  }else{
+    res.render('review_create', {title: 'Создать отзыв', review: {}});
+  }
+});
+
+
+router.post('/changeStatus', (req, res, next) => {
+    reviews.changeStatus(req.body, (err, result) => {
+      if(err) console.log(err);
+      res.send('1');
+    });
 });
 
 module.exports = router;

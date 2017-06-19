@@ -5,11 +5,24 @@ block content
   div.mdl-grid.mdl-grid__container
       div.mdl-cell.mdl-cell--12-col
           h1= title
+            button.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored.create_review.edit-review__content
+                i.material-icons add
           ul.mdl-list
             each review in reviews
-              li.mdl-list__item
-                span.mdl-list__item-primary-content= review.name
+              li.mdl-list__item.mdl-list__item--three-line.mdl-list__item--bordered
+                span.mdl-list__item-primary-content.edit-review__content(data-id= review.id)
+                  span= review.name
+                  span.mdl-list__item-text-body= review.preview
                 span.mdl-list__item-secondary-action
                   label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for=review.id)
-                    input(type="checkbox" id=review.id class="mdl-switch__input" checked=review.is_active)
+                    input(type="checkbox" id=review.id class="mdl-switch__input" checked=review.is_active || null)
+
+  dialog.mdl-dialog.mdl-dialog--big
+    h4.mdl-dialog__title
+    .mdl-dialog__content
+    .mdl-dialog__actions
+      button.mdl-button#edit_review(type='button') Сохранить
+      button.mdl-button.close(type='button') Отменить
+
+
 

@@ -25,3 +25,24 @@ input:active, input:focus,textarea:active, textarea:focus {
 input::-moz-focus-inner {
   border: 0;
 }
+.mdl-list__item--bordered{
+  border-bottom: 1px solid #efefef;
+  transition: background-color .2s ease-in-out;
+  cursor: pointer;
+  &:hover{
+    background-color: #fbfbfb;
+  }
+}
+.mdl-dialog--big{
+  width: 600px;
+  form{
+    width: 100%;
+    margin:auto;
+    .mdl-textfield{
+      width: 100%;
+    }
+  }
+}
+.create_review{
+  float: right;
+}

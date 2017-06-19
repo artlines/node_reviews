@@ -1,0 +1,9 @@
+div.mdl-textfield
+    input(name='rating' type='number' min='0' max='5' class='mdl-textfield__input' placeholder="рейтинг" required value=review.rating || null)
+    p.error-message
+div.mdl-textfield
+    input(name='preview' type='text' class='mdl-textfield__input' placeholder="превью" required value=review.preview || null)
+    p.error-message
+div.mdl-textfield
+    textarea(name='text' class='mdl-textfield__input' type='text' placeholder="Отзыв" required rows=10)= review.text || null
+    p.error-message

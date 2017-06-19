@@ -22,7 +22,6 @@ module.exports.getAll = (active, done) => {
 
   db.get().query(sql, condition_values, (err, rows) => {
     if (err) return done(err);
-    console.log(rows);
     done(null, rows);
   });
 };
@@ -36,15 +35,30 @@ module.exports.getSessionData = (id, done) => {
   });
 };
 
-module.exports.edit = (data, userId, done) => {
-  db.get().query('UPDATE reviews SET ? WHERE id = ?', [data, userId], (err, rows) => {
+module.exports.edit = (data, reviewId, done) => {
+  db.get().query('UPDATE reviews SET ? WHERE id = ?', [data, reviewId], (err, rows) => {
     if (err) return done(err);
     done(null, rows);
   });
 };
 
-module.exports.delete = (userId, done) => {
-  db.get().query('DELETE FROM reviews WHERE id = ?', [userId], (err, rows) => {
+module.exports.getOne = (reviewId, done) => {
+  db.get().query('SELECT id, rating, preview, text FROM reviews WHERE id = ?', [reviewId], (err, rows) => {
+    if (err) return done(err);
+    console.log(rows);
+    done(null, rows);
+  });
+};
+
+module.exports.changeStatus = (data, done) => {
+  db.get().query('UPDATE reviews SET is_active = ? WHERE id = ?', [data.is_active, data.id], (err, rows) => {
+    if (err) return done(err);
+    done(null, rows);
+  });
+};
+
+module.exports.delete = (reviewId, done) => {
+  db.get().query('DELETE FROM reviews WHERE id = ?', [reviewId], (err, rows) => {
     if (err) return done(err);
     done(null, rows);
   });

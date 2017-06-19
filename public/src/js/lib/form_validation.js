@@ -12,7 +12,7 @@ function formValidation(form) {
 
   for (let i = 0, l = form.length; i < l; i++) {
     let input = form[i];
-    if (input.checkValidity() == false) {
+    if (input && input.checkValidity() == false) {
       let inputValidator = new Validator();
       inputValidator.checkValidity(input);
       let customValidityMessage = inputValidator.getInvalidities();
