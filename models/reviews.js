@@ -9,7 +9,8 @@ module.exports.create = (data, done) => {
 
 module.exports.getAll = (active, done) => {
   let active_reviews = '';
-  let condition_values = [12];
+  let condition_values = [db.config.USER_NAME];
+  //показать все отзывы для админа или активные для пользователя
   if (active){
     active_reviews = ` AND r.is_active=?`;
     condition_values.push(db.config.ACTIVE);
@@ -26,15 +27,6 @@ module.exports.getAll = (active, done) => {
   });
 };
 
-
-
-module.exports.getSessionData = (id, done) => {
-  db.get().query('SELECT * FROM ci_sessions WHERE id=?', id, (err, rows) => {
-    if (err) return done(err);
-    done(null, rows);
-  });
-};
-
 module.exports.edit = (data, reviewId, done) => {
   db.get().query('UPDATE reviews SET ? WHERE id = ?', [data, reviewId], (err, rows) => {
     if (err) return done(err);
@@ -45,7 +37,6 @@ module.exports.edit = (data, reviewId, done) => {
 module.exports.getOne = (reviewId, done) => {
   db.get().query('SELECT id, rating, preview, text FROM reviews WHERE id = ?', [reviewId], (err, rows) => {
     if (err) return done(err);
-    console.log(rows);
     done(null, rows);
   });
 };

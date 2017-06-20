@@ -1,4 +1,4 @@
-function formValidation(form) {
+function formValidation(form, done) {
   const Validator = require('./validator');
   let errors = document.querySelectorAll('.error-message');
   let data = {
@@ -24,7 +24,7 @@ function formValidation(form) {
       data.checked[input.name] = input.value;
     }
   }
-  return data;
+  done(null, data);
 }
 
 module.exports = formValidation;

@@ -1,3 +1,3 @@
 block content
-  form(method='post', action='reviews/edit/'+review.id, name='reviewEdit' data-id= review.id)
+  form(method='post', action=review.url, name='reviewEdit' data-id= review.id)
     include partials/reviewOneFields

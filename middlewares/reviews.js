@@ -1,6 +1,7 @@
 let process = {
   validator: require('validator'),
-  validate(data){
+
+  validate(data, done){
     let processedData = {
       errors: [],
       checked: {}
@@ -30,15 +31,16 @@ let process = {
       processedData.checked.preview = processedData.checked.text.substring(0,200);
     }
 
-      return processedData;
+    done(null, processedData);
+
   },
 
-  unescape(data){
+  unescape(data, done){
     for(let key in data){
       data[key].text = this.validator.unescape(data[key].text);
       data[key].preview = this.validator.unescape(data[key].preview);
     }
-    return data;
+    done(null, data);
   },
 
   getUserData(session_id, done){

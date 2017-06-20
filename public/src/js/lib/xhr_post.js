@@ -1,14 +1,11 @@
-function xhrPost(formName, data, url){
-  const form = document.forms[formName] || formName;
+function xhrPost(data, done){
   let xhr = new XMLHttpRequest();
-  let dataJSON = JSON.stringify(data);
-  xhr.open("POST", url);
+  let dataJSON = JSON.stringify(data.checked || data);
+  xhr.open("POST", data.url);
   xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
   xhr.onreadystatechange = () => {
-    if (form && xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200 && !data.update) {
-      form.insertAdjacentHTML('afterend', '<p class="error-message">' + xhr.responseText + '</p>');
-    }else if(data.update){
-      form.innerHTML = xhr.responseText;
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      done(null, xhr.responseText);
     }
   };
   xhr.send(dataJSON);

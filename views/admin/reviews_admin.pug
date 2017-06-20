@@ -16,6 +16,9 @@ block content
                 span.mdl-list__item-secondary-action
                   label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for=review.id)
                     input(type="checkbox" id=review.id class="mdl-switch__input" checked=review.is_active || null)
+                span.mdl-list__item-secondary-action.delete_review(data-id= review.id)
+                  i.material-icons close
+
 
   dialog.mdl-dialog.mdl-dialog--big
     h4.mdl-dialog__title
@@ -23,6 +26,8 @@ block content
     .mdl-dialog__actions
       button.mdl-button#edit_review(type='button') Сохранить
       button.mdl-button.close(type='button') Отменить
-
+  div#snackbar.mdl-js-snackbar.mdl-snackbar
+    .mdl-snackbar__text
+    button.mdl-snackbar__action(type='button')
 
 

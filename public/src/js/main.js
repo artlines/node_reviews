@@ -16,15 +16,20 @@ if (document.forms.reviewCreate){
 
   reviewCreateSubmit.addEventListener('click', e => {
     let inputs = reviewCreateForm.elements;
-    let url = "/reviews/create";
-    let data = formValidation(inputs);
-
-    if (data.stopSubmit) {
-      e.preventDefault();
-    } else {
-      e.preventDefault();
-      xhrPost(reviewCreateForm.name, data.checked, url);
-    };
+    formValidation(inputs, (err, data) => {
+      if (data.stopSubmit) {
+        e.preventDefault();
+      } else {
+        e.preventDefault();
+        if(err) return false;
+        data.formName = reviewCreateForm.name;
+        data.url = "/reviews/create";
+        xhrPost(data, (err, result) =>{
+          if (err) console.log(err);
+          reviewCreateForm.name.insertAdjacentHTML('afterend', '<p class="error-message">' + result + '</p>')
+        });
+      };
+    });
   });
 }
 
@@ -33,7 +38,10 @@ $('.edit-review__content').click( function(e){
   let review_id = $(this).data('id') || 0;
   let modal_content = document.querySelector('.mdl-dialog__content');
   let url = "/reviews/getOne/"+review_id;
-  xhrPost(modal_content, {update: true}, url);
+  xhrPost({url: url}, (err, result) =>{
+    if (err) console.log(err);
+    modal_content.innerHTML = result;
+  });
   let dialog = document.querySelector('dialog');
   if (! dialog.showModal) {
     dialogPolyfill.registerDialog(dialog);
@@ -50,22 +58,48 @@ $('#edit_review').click(function (e) {
   let form = document.forms.reviewEdit;
   let inputs = form.elements;
   let review_id = $(form).data('id') || 0;
-  let url = "/reviews/edit/"+review_id;
-  let data = formValidation(inputs);
   let dialog = document.querySelector('dialog');
+  formValidation(inputs, (err, data) => {
+    if(err) return false;
+    data.url = "/reviews/edit/"+review_id;
 
-  xhrPost(form.name, data.checked, url);
-  setTimeout(function () {
-    dialog.close();
-  }, 3000);
+    xhrPost(data, (err, result) =>{
+      if (err) console.log(err);
+      let snackbarContainer = document.querySelector('#snackbar');
+      let data = {
+        message: result,
+        timeout: 3000,
+      };
+      snackbarContainer.MaterialSnackbar.showSnackbar(data);
+      setTimeout(function () {
+        dialog.close();
+      }, 2000);
+    });
+  });
+
 });
 
 //изменить статус отзыва
 $('.mdl-switch__input').change( e => {
   let data = {};
-  let url = "/reviews/changeStatus";
+  data.url = "/reviews/changeStatus";
   data.is_active = +e.target.checked;
   data.id = +e.target.id;
   //console.log(document.forms);
-  xhrPost(e.target.name, data, url);
+  xhrPost(data, (err, result) =>{
+    if (err) console.log(err);
+  });
+});
+
+//Удалить отзыв
+$('.delete_review').click( function (e) {
+  let data = {};
+  data.id = $(this).data('id') || 0;
+  data.url = "/reviews/delete/"+data.id;
+  xhrPost(data, (err, result) => {
+    if (err) console.log(err);
+    if(result == 'ok'){
+      $(this).parents('li').remove();
+    }
+  });
 });

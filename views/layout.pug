@@ -10,20 +10,39 @@ html
     div.mdl-layout.mdl-js-layout.mdl-layout--fixed-header
       header.mdl-layout__header
         div.mdl-layout__header-row
-          span.mdl-layout-title='artline'
+          span.mdl-layout-title='Административная панель belleyou'
           div.mdl-layout-spacer
           nav.mdl-navigation
-            a(href='/').mdl-navigation__link='Link'
-            a.mdl-navigation__link='Link'
-            a.mdl-navigation__link='Link'
-            a.mdl-navigation__link='Link'
+            a.mdl-navigation__link(href='/admin/razdel') Разделы
+            a.mdl-navigation__link(href='/admin/seo') SEO
+            a.mdl-navigation__link(href='/admin/news') Новости
+            a.mdl-navigation__link(href='/admin/articles') Статьи
+            a.mdl-navigation__link(href='/admin/banners') Баннеры
+            a.mdl-navigation__link(href='/admin/users') Пользователи
+            a.mdl-navigation__link(href='/admin/zakaz') Заказы
+            a.mdl-navigation__link(href='/admin/search') Поисковые запросы
+            a.mdl-navigation__link(href='/admin/config') Настройки
+            a.mdl-navigation__link(href='/admin_catalog_full/catalog') Каталог
+            a.mdl-navigation__link(href='/admin_external/catalog') Внешний каталог
+            a.mdl-navigation__link(href='/admin_exchange1c/main') Обмен 1C
+            a.mdl-navigation__link(href='/reviews/admin') Отзывы
+
       div.mdl-layout__drawer
         span.mdl-layout-title='artline'
         nav.mdl-navigation
-          a.mdl-navigation__link='Link'
-          a.mdl-navigation__link='Link'
-          a.mdl-navigation__link='Link'
-          a.mdl-navigation__link='Link'
+          a.mdl-navigation__link(href='/admin/razdel') Разделы
+          a.mdl-navigation__link(href='/admin/seo') SEO
+          a.mdl-navigation__link(href='/admin/news') Новости
+          a.mdl-navigation__link(href='/admin/articles') Статьи
+          a.mdl-navigation__link(href='/admin/banners') Баннеры
+          a.mdl-navigation__link(href='/admin/users') Пользователи
+          a.mdl-navigation__link(href='/admin/zakaz') Заказы
+          a.mdl-navigation__link(href='/admin/search') Поисковые запросы
+          a.mdl-navigation__link(href='/admin/config') Настройки
+          a.mdl-navigation__link(href='/admin_catalog_full/catalog') Каталог
+          a.mdl-navigation__link(href='/admin_external/catalog') Внешний каталог
+          a.mdl-navigation__link(href='/admin_exchange1c/main') Обмен 1C
+          a.mdl-navigation__link(href='/reviews/admin') Отзывы
       main.mdl-layout__content
         div.page-content
           block content

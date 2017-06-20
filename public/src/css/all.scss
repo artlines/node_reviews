@@ -46,3 +46,18 @@ input::-moz-focus-inner {
 .create_review{
   float: right;
 }
+.delete_review{
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  padding: 0.3em;
+  text-align: center;
+  line-height: 2.7;
+  margin: 1em;
+  margin-right: 0;
+  padding-right: 0;
+  transition: all .2s ease-in-out;
+  &:hover{
+    transform: rotate(90deg);
+  }
+}
