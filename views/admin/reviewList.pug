@@ -1,0 +1,13 @@
+ul.mdl-list.review__list
+    each review in reviews
+      li.mdl-list__item.mdl-list__item--three-line.mdl-list__item--bordered
+        span.mdl-list__item-primary-content.edit-review__content(data-id= review.id)
+          span= review.name
+          span= review.date
+          span= review.product_id || ''
+          span.mdl-list__item-text-body= review.preview
+        span.mdl-list__item-secondary-action
+          label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for=review.id)
+            input(type="checkbox" id=review.id class="mdl-switch__input" checked=review.is_active || null)
+        span.mdl-list__item-secondary-action.delete_review(data-id= review.id)
+          i.material-icons close

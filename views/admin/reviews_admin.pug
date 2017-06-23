@@ -7,17 +7,15 @@ block content
           h1= title
             button.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored.create_review.edit-review__content
                 i.material-icons add
-          ul.mdl-list
-            each review in reviews
-              li.mdl-list__item.mdl-list__item--three-line.mdl-list__item--bordered
-                span.mdl-list__item-primary-content.edit-review__content(data-id= review.id)
-                  span= review.name
-                  span.mdl-list__item-text-body= review.preview
-                span.mdl-list__item-secondary-action
-                  label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for=review.id)
-                    input(type="checkbox" id=review.id class="mdl-switch__input" checked=review.is_active || null)
-                span.mdl-list__item-secondary-action.delete_review(data-id= review.id)
-                  i.material-icons close
+          .mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
+            .mdl-tabs__tab-bar
+              a.mdl-tabs__tab.is-active(href='#reviews__all') Все
+              a.mdl-tabs__tab(href='#reviews__shop') О магазине
+              a.mdl-tabs__tab(href='#reviews__products') О Товарах
+            #reviews__all.mdl-tabs__panel.is-active
+              include reviewList
+            #reviews__shop.mdl-tabs__panel
+            #reviews__products.mdl-tabs__panel
 
 
   dialog.mdl-dialog.mdl-dialog--big

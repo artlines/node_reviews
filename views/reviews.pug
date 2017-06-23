@@ -6,12 +6,18 @@ block content
       h1= title
       p Welcome to #{title}
     div.reviews.mdl-cell.mdl-cell--12-col
+      p= reviews.product_rating || null
+      p= reviews.shop_rating || null
       each review in reviews
           div.review
-            each val, key in review
-              li= key
-                p= val
+            p= review.date
+            p= review.name
+            p= review.rating
           hr
 
       form(method='post', action='reviews/create', name='reviewCreate')
         include partials/reviewFields
+      div#snackbar.mdl-js-snackbar.mdl-snackbar
+        .mdl-snackbar__text
+        button.mdl-snackbar__action(type='button')
+      script(src='/public/build/js/main.js')

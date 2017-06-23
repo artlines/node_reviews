@@ -5,37 +5,47 @@ let config = require('../config');
 let validator = require('validator');
 let processData = require('../middlewares/reviews');
 
-router.get('/', (req, res, next) => {
+router.all('/', (req, res, next) => {
   processData.getUserData(req.cookies.ci_session, (err, result) => {
     let user_id = result;
+    let filter = {
+      active: true,
+      type: req.body.type || 'shop',
+      product_id: req.body.product_id
+    };
     if(err) console.log(err);
-    reviews.getAll(true, (err, result) => {
+    reviews.getAll(filter, (err, result) => {
       if(err) console.log(err);
       processData.unescape(result, (err, r) =>{
         if(err) console.log(err);
-        res.render('reviews', {title: 'Отывы', reviews: r, user_id: user_id});
+        res.render('reviews', {title: 'Отзывы', reviews: r, user_id: user_id});
       });
     });
   });
 });
 
-router.get('/admin', (req, res, next) => {
+router.all('/admin', (req, res, next) => {
   processData.getUserData(req.cookies.ci_session, (err, result) => {
     let user_id = JSON.parse(result);
     if(user_id == 1){
-      reviews.getAll(false, (err, result) => {
+      let filter = {
+        active: false,
+        type: req.body.type
+      };
+      reviews.getAll(filter, (err, result) => {
         if(err) console.log(err);
         processData.unescape(result, (err, r) =>{
           if(err) console.log(err);
           res.render('admin/reviews_admin', {title: 'Редактирование отзывов', reviews: r});
         });
       });
+
     }else{
      res.redirect('/login');
     }
+
   });
 });
-
 
 router.post('/create', (req, res, next) => {
   //проверка полей и очитска

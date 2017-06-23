@@ -3,14 +3,14 @@ html
   head
     title=title
     link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
-    link(rel='stylesheet', href='/public/src/css/lib//material.min.css')
     link(rel='stylesheet', href='/public/build/css/all.css')
+    script(src='/public/node_modules/jquery/dist/jquery.min.js')
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
     div.mdl-layout.mdl-js-layout.mdl-layout--fixed-header
       header.mdl-layout__header
         div.mdl-layout__header-row
-          span.mdl-layout-title='Административная панель belleyou'
+          span.mdl-layout-title='belleyou'
           div.mdl-layout-spacer
           nav.mdl-navigation
             a.mdl-navigation__link(href='/admin/razdel') Разделы
@@ -28,7 +28,7 @@ html
             a.mdl-navigation__link(href='/reviews/admin') Отзывы
 
       div.mdl-layout__drawer
-        span.mdl-layout-title='artline'
+        span.mdl-layout-title='belleyou'
         nav.mdl-navigation
           a.mdl-navigation__link(href='/admin/razdel') Разделы
           a.mdl-navigation__link(href='/admin/seo') SEO
@@ -46,5 +46,5 @@ html
       main.mdl-layout__content
         div.page-content
           block content
-  script(src='/public/src/js/lib/material.min.js')
+  #script(src='/public/src/js/lib/material.min.js')
   script(src='/public/build/js/main.js')

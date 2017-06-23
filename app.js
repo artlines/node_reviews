@@ -10,7 +10,7 @@ let app = express();
 let reviews = require('./routes/reviews');
 let db = require('./db');
 let helmet = require('helmet');
-
+let compression = require('compression');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(compression());
 app.use('/reviews', reviews);
 
 // Connect to MySQL on start
@@ -32,7 +32,7 @@ db.connect(db.config.MODE_TEST, function(err) {
     console.log('Unable to connect to MySQL.');
     process.exit(1);
   }
-  console.log('start mysql');
+  console.log('start mysql in '+ process.env.NODE_ENV);
 });
 
 // catch 404 and forward to error handler

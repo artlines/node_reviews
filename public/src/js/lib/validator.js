@@ -4,7 +4,6 @@ Validator.prototype = {
   error: '',
   checkValidity: function(input) {
     var validity = input.validity;
-    console.log(validity);
 
     if (validity.valueMissing) {
       this.addInvalidity('Поле не должно быть пусто!');
