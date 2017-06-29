@@ -7,6 +7,6 @@ module.exports.proccessForm = (form, done) => {
     });
   });
 
-  return formData;
+  done(formData);
 };
 

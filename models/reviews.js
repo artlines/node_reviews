@@ -23,6 +23,7 @@ module.exports.getAll = (filter, done) => {
   }else if(filter.type == 'product_id'){
     conditions += ` AND r.product_id = ${filter.product_id}`;
   }
+  
   let sql = `
     SELECT r.id, r.preview, r.text, r.rating, r.user_id,
      r.product_id, r.date, r.is_active, COALESCE(uv.value, '') as name

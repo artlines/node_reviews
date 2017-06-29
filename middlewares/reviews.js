@@ -1,7 +1,7 @@
 let process = {
   validator: require('validator'),
   https: require('https'),
-
+  
   validate(data, done){
     let processedData = {
       errors: [],
@@ -39,7 +39,6 @@ let process = {
     }
 
     done(null, processedData);
-
   },
 
   unescape(data, done){
@@ -52,6 +51,7 @@ let process = {
       done(null, data);
     });
   },
+
   checkProductRating(data, done){
     let shop_rating = 0;
     let product_rating = 0;
@@ -72,7 +72,7 @@ let process = {
   },
 
   getUserData(session_id, done){
-    this.https.get('https://belleyou.ru/user/unserializeSessionData/?session_id='+session_id, (response) => {
+    this.https.get('https://xxx.ru/user/unserializeSessionData/?session_id='+session_id, (response) => {
       let rawData = '';
       response.setEncoding('utf8');
       response.on('data', (row) => rawData += row);

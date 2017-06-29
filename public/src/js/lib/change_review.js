@@ -1,4 +1,3 @@
-require('material-design-lite');
 const $ = require('jquery');
 const xhrPost = require('./xhr_post');
 const formValidation = require('./form_validation');
